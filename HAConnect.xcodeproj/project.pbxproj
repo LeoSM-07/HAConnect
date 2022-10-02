@@ -11,6 +11,9 @@
 		42A38F8328EA121300D669D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8228EA121300D669D3 /* ContentView.swift */; };
 		42A38F8528EA121400D669D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8428EA121400D669D3 /* Assets.xcassets */; };
 		42A38F8828EA121400D669D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8728EA121400D669D3 /* Preview Assets.xcassets */; };
+		42A38F9028EA219D00D669D3 /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42A38F8F28EA219D00D669D3 /* HAKit */; };
+		42A38F9228EA21F700D669D3 /* HAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F9128EA21F700D669D3 /* HAManager.swift */; };
+		42A38F9528EA223200D669D3 /* SecretsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F9428EA223200D669D3 /* SecretsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,8 @@
 		42A38F8228EA121300D669D3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		42A38F8428EA121400D669D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42A38F8728EA121400D669D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		42A38F9128EA21F700D669D3 /* HAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HAManager.swift; sourceTree = "<group>"; };
+		42A38F9428EA223200D669D3 /* SecretsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42A38F9028EA219D00D669D3 /* HAKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +57,7 @@
 		42A38F7F28EA121300D669D3 /* HAConnect */ = {
 			isa = PBXGroup;
 			children = (
+				42A38F9328EA222700D669D3 /* Managers */,
 				42A38F8028EA121300D669D3 /* HAConnectApp.swift */,
 				42A38F8228EA121300D669D3 /* ContentView.swift */,
 				42A38F8428EA121400D669D3 /* Assets.xcassets */,
@@ -65,6 +72,15 @@
 				42A38F8728EA121400D669D3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		42A38F9328EA222700D669D3 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				42A38F9128EA21F700D669D3 /* HAManager.swift */,
+				42A38F9428EA223200D669D3 /* SecretsManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +99,9 @@
 			dependencies = (
 			);
 			name = HAConnect;
+			packageProductDependencies = (
+				42A38F8F28EA219D00D669D3 /* HAKit */,
+			);
 			productName = HAConnect;
 			productReference = 42A38F7D28EA121300D669D3 /* HAConnect.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +130,9 @@
 				Base,
 			);
 			mainGroup = 42A38F7428EA121300D669D3;
+			packageReferences = (
+				42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */,
+			);
 			productRefGroup = 42A38F7E28EA121300D669D3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +160,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A38F8328EA121300D669D3 /* ContentView.swift in Sources */,
+				42A38F9228EA21F700D669D3 /* HAManager.swift in Sources */,
 				42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */,
+				42A38F9528EA223200D669D3 /* SecretsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +363,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/home-assistant/HAKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42A38F8F28EA219D00D669D3 /* HAKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */;
+			productName = HAKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42A38F7528EA121300D669D3 /* Project object */;
 }

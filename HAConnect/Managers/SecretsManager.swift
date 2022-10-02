@@ -9,5 +9,5 @@ import Foundation
 
 struct AppSecrets {
     let url = "http://homeassistant.local:8123"
-    let token = "abcdefgh"
+    let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ODFkOTY1ODRmY2M0NTc0OGVkZGIwM2QwNzFmNzEzNyIsImlhdCI6MTY2NDczNDQzMCwiZXhwIjoxOTgwMDk0NDMwfQ.5GuNHuNzlad-3sXE_O5v7TyYaqMd6DKC8TjgCZOiBII"
 }

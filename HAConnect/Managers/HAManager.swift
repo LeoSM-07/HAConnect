@@ -14,6 +14,7 @@ class HAKitViewModel: ObservableObject {
         getUser()
         getEntities()
         getRoomEntities()
+        subscribeToChanges()
     }
 
     let connection = HAKit.connection(configuration: .init(
@@ -70,7 +71,7 @@ class HAKitViewModel: ObservableObject {
         }
     }
 
-    @Published var roomIdList: [String] = ["leo_s_bedroom", "Our Bedroom"]
+    @Published var roomIdList: [String] = ["Léo Bedroom", "Our Bedroom", "Couch"]
     @Published var roomEntityList: [[String]] = []
 
     func getRoomEntities() {
@@ -92,6 +93,17 @@ class HAKitViewModel: ObservableObject {
                 cancelToken.cancel()
             }
         )
+    }
+
+    func subscribeToChanges() {
+        connection.subscribe(
+            to: .stateChanged()) { cancel, result in
+                if let row = self.entities.firstIndex(where: {$0.entityId == result.entityId}) {
+                    if result.newState != nil {
+                        self.entities[row] = result.newState!
+                    }
+                }
+            }
     }
 
     @Published var user: HAResponseCurrentUser = HAResponseCurrentUser(

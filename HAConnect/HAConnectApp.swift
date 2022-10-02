@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct HAConnectApp: App {
+
+    @StateObject var homeAssistant = HAKitViewModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(homeAssistant)
         }
     }
 }

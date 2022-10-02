@@ -8,6 +8,19 @@
 import HAKit
 import SwiftUI
 
+extension Dictionary {
+
+    mutating func merge(with dictionary: Dictionary) {
+        dictionary.forEach { updateValue($1, forKey: $0) }
+    }
+
+    func merged(with dictionary: Dictionary) -> Dictionary {
+        var dict = self
+        dict.merge(with: dictionary)
+        return dict
+    }
+}
+
 class HAKitViewModel: ObservableObject {
 
     init() {
@@ -41,11 +54,21 @@ class HAKitViewModel: ObservableObject {
         }
     }
 
-    func callService(id: String, d: String, s: String) {
+    func callService(id: String, d: String, s: String, data: Dictionary<String, Any>? ) {
+
+        var entityData: [String: Any] = ["entity_id": id]
+        var finalData: [String: Any] {
+            if data != nil {
+                return entityData.merged(with: data!)
+            } else {
+                return entityData
+            }
+        }
+
         connection.send(.callService(
             domain: HAServicesDomain(rawValue: d),
             service: HAServicesService(rawValue: s),
-            data: ["entity_id": id]
+            data: finalData
         )) { result in
             switch result {
             case let .success(data):
@@ -104,6 +127,17 @@ class HAKitViewModel: ObservableObject {
                     }
                 }
             }
+    }
+
+    func updateEntityBrightness(id: String, new: Int) {
+        if let row = self.entities.firstIndex(where: {$0.entityId == id}) {
+            self.entities[row].attributes.dictionary["brightness"] = new
+        }
+    }
+    func updateEntityState(id: String, new: String) {
+        if let row = self.entities.firstIndex(where: {$0.entityId == id}) {
+            self.entities[row].state = new
+        }
     }
 
     @Published var user: HAResponseCurrentUser = HAResponseCurrentUser(

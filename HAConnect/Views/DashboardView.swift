@@ -17,7 +17,7 @@ struct DashboardView: View {
         GridItem(.flexible())
     ]
 
-    @State var showSliders = false
+    @State var showSliders = true
 
     var body: some View {
         NavigationView {

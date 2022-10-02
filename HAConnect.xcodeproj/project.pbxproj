@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		423991A028EA2ECE0022F1C4 /* ColorHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4239919F28EA2ECE0022F1C4 /* ColorHelpers.swift */; };
+		423991A328EA3B350022F1C4 /* LightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991A228EA3B350022F1C4 /* LightCard.swift */; };
+		423991A528EA40400022F1C4 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991A428EA40400022F1C4 /* Haptics.swift */; };
 		42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8028EA121300D669D3 /* HAConnectApp.swift */; };
 		42A38F8328EA121300D669D3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8228EA121300D669D3 /* RootView.swift */; };
 		42A38F8528EA121400D669D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8428EA121400D669D3 /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		4239919F28EA2ECE0022F1C4 /* ColorHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelpers.swift; sourceTree = "<group>"; };
+		423991A228EA3B350022F1C4 /* LightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightCard.swift; sourceTree = "<group>"; };
+		423991A428EA40400022F1C4 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		42A38F7D28EA121300D669D3 /* HAConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HAConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A38F8028EA121300D669D3 /* HAConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HAConnectApp.swift; sourceTree = "<group>"; };
 		42A38F8228EA121300D669D3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -46,8 +50,17 @@
 			isa = PBXGroup;
 			children = (
 				4239919F28EA2ECE0022F1C4 /* ColorHelpers.swift */,
+				423991A428EA40400022F1C4 /* Haptics.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		423991A128EA3B2B0022F1C4 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				423991A228EA3B350022F1C4 /* LightCard.swift */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		42A38F7428EA121300D669D3 = {
@@ -99,6 +112,7 @@
 		42A38F9628EA232A00D669D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				423991A128EA3B2B0022F1C4 /* Cards */,
 				42A38F8228EA121300D669D3 /* RootView.swift */,
 				42A38F9728EA235F00D669D3 /* DashboardView.swift */,
 			);
@@ -185,8 +199,10 @@
 				42A38F9228EA21F700D669D3 /* HAManager.swift in Sources */,
 				42A38F9828EA235F00D669D3 /* DashboardView.swift in Sources */,
 				42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */,
+				423991A528EA40400022F1C4 /* Haptics.swift in Sources */,
 				42A38F9528EA223200D669D3 /* SecretsManager.swift in Sources */,
 				423991A028EA2ECE0022F1C4 /* ColorHelpers.swift in Sources */,
+				423991A328EA3B350022F1C4 /* LightCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

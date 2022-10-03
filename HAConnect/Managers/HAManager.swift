@@ -56,7 +56,7 @@ class HAKitViewModel: ObservableObject {
 
     func callService(id: String, d: String, s: String, data: Dictionary<String, Any>? ) {
 
-        var entityData: [String: Any] = ["entity_id": id]
+        let entityData: [String: Any] = ["entity_id": id]
         var finalData: [String: Any] {
             if data != nil {
                 return entityData.merged(with: data!)
@@ -93,14 +93,18 @@ class HAKitViewModel: ObservableObject {
             }
         }
     }
-
-    @Published var roomIdList: [String] = ["Léo Bedroom", "Our Bedroom", "Couch"]
+//"Léo Bedroom", "Our Bedroom", "Couch"
+    @Published var roomIdList: [RoomItem] = [
+        RoomItem(roomId: "leo_s_bedroom", roomName: "Léo Bedroom"),
+        RoomItem(roomId: "our_bedroom", roomName: "Parent's Bedroom"),
+        RoomItem(roomId: "couch", roomName: "Parent's Bedroom")
+    ]
     @Published var roomEntityList: [[String]] = []
 
     func getRoomEntities() {
 
         var templateText = "{{ area_entities('"
-        templateText.append(roomIdList.joined(separator: "') }},{{ area_entities('"))
+        templateText.append(roomIdList.map({ $0.roomId }).joined(separator: "') }},{{ area_entities('"))
         templateText.append("') }}")
 
         print("Attempting to print area...")
@@ -148,14 +152,35 @@ class HAKitViewModel: ObservableObject {
         credentials: [HAResponseCurrentUser.Credential(type: "", id: "")],
         mfaModules: [HAResponseCurrentUser.MFAModule(id: "", name: "", isEnabled: false)]
     )
+    @Published var userImagePath: String = ""
 
-    @Published var entities: [HAEntity] = []
+    func getUserImagePath() {
+        connection.subscribe(
+            to: .renderTemplate("{{ states.person|selectattr('attributes.user_id', '==', 'fc3451be751448f898860d3950661d9e')|map(attribute='attributes.entity_picture')|first }}"),
+          initiated: { _ in },
+          handler: { cancelToken, response in
+              if let object = response.result as? String {
+                  self.userImagePath = object
+              }
+            cancelToken.cancel()
+          }
+        )
+    }
 
     var availableEntityDomains: [String] {
         return unique(source: entities.map({ HAEntity in
             HAEntity.domain
         }))
     }
+
+    @Published var entities: [HAEntity] = []
+
+}
+
+struct RoomItem: Identifiable {
+    let id = UUID()
+    var roomId: String
+    var roomName: String
 }
 
 func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {

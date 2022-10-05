@@ -23,6 +23,9 @@ struct SettingsView: View {
                         .interactiveDismissDisabled(true)
                 }
                 .foregroundColor(.accentColor)
+                Button("Test WS") {
+                    homeAssistant.testWS()
+                }
                 
                 Section("Areas") {
                     ForEach(homeAssistant.roomIdList) { item in

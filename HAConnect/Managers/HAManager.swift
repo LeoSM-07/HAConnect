@@ -21,6 +21,24 @@ extension Dictionary {
     }
 }
 
+struct RoomItem: Identifiable {
+    let id = UUID()
+    var roomId: String
+    var roomName: String
+}
+
+func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
+    var buffer = [T]()
+    var added = Set<T>()
+    for elem in source {
+        if !added.contains(elem) {
+            buffer.append(elem)
+            added.insert(elem)
+        }
+    }
+    return buffer
+}
+
 class HAKitViewModel: ObservableObject {
     
     @EnvironmentObject var appSettings: AppSettings
@@ -177,23 +195,15 @@ class HAKitViewModel: ObservableObject {
 
     @Published var entities: [HAEntity] = []
 
-}
-
-struct RoomItem: Identifiable {
-    let id = UUID()
-    var roomId: String
-    var roomName: String
-}
-
-func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
-    var buffer = [T]()
-    var added = Set<T>()
-    for elem in source {
-        if !added.contains(elem) {
-            buffer.append(elem)
-            added.insert(elem)
+    func testWS() {
+        
+        connection.send(.getAreas()) { result in
+            print(result.map({ test in
+                test.map { area in
+                    area.name
+                }
+            }))
         }
     }
-    return buffer
+    
 }
-

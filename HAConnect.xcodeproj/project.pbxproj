@@ -13,11 +13,11 @@
 		423991AA28EA5BD50022F1C4 /* EntityIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991A928EA5BD50022F1C4 /* EntityIcon.swift */; };
 		423991AC28EA5C080022F1C4 /* LightBrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AB28EA5C080022F1C4 /* LightBrightnessSlider.swift */; };
 		423991AE28EA5CCA0022F1C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AD28EA5CCA0022F1C4 /* SettingsView.swift */; };
+		428F291628EE22DA006728AA /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 428F291528EE22DA006728AA /* HAKit */; };
 		42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8028EA121300D669D3 /* HAConnectApp.swift */; };
 		42A38F8328EA121300D669D3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8228EA121300D669D3 /* RootView.swift */; };
 		42A38F8528EA121400D669D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8428EA121400D669D3 /* Assets.xcassets */; };
 		42A38F8828EA121400D669D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8728EA121400D669D3 /* Preview Assets.xcassets */; };
-		42A38F9028EA219D00D669D3 /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42A38F8F28EA219D00D669D3 /* HAKit */; };
 		42A38F9228EA21F700D669D3 /* HAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F9128EA21F700D669D3 /* HAManager.swift */; };
 		42A38F9528EA223200D669D3 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F9428EA223200D669D3 /* AppSettings.swift */; };
 		42A38F9828EA235F00D669D3 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F9728EA235F00D669D3 /* DashboardView.swift */; };
@@ -61,8 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				428F291628EE22DA006728AA /* HAKit in Frameworks */,
 				42CA9BEC28ED608F00B53C9E /* SlideOverCard in Frameworks */,
-				42A38F9028EA219D00D669D3 /* HAKit in Frameworks */,
 				42CA9BEF28ED60D900B53C9E /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,8 +100,8 @@
 		42A38F7428EA121300D669D3 = {
 			isa = PBXGroup;
 			children = (
-				42CA9BF128ED6B6F00B53C9E /* LICENCE.md */,
 				42CA9BF028ED67CD00B53C9E /* README.md */,
+				42CA9BF128ED6B6F00B53C9E /* LICENCE.md */,
 				42A38F7F28EA121300D669D3 /* HAConnect */,
 				42A38F7E28EA121300D669D3 /* Products */,
 			);
@@ -204,9 +204,9 @@
 			);
 			name = HAConnect;
 			packageProductDependencies = (
-				42A38F8F28EA219D00D669D3 /* HAKit */,
 				42CA9BEB28ED608F00B53C9E /* SlideOverCard */,
 				42CA9BEE28ED60D900B53C9E /* CodeScanner */,
+				428F291528EE22DA006728AA /* HAKit */,
 			);
 			productName = HAConnect;
 			productReference = 42A38F7D28EA121300D669D3 /* HAConnect.app */;
@@ -237,9 +237,9 @@
 			);
 			mainGroup = 42A38F7428EA121300D669D3;
 			packageReferences = (
-				42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */,
 				42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */,
 				42CA9BED28ED60D900B53C9E /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				428F291428EE22DA006728AA /* XCRemoteSwiftPackageReference "HAKit" */,
 			);
 			productRefGroup = 42A38F7E28EA121300D669D3 /* Products */;
 			projectDirPath = "";
@@ -497,12 +497,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */ = {
+		428F291428EE22DA006728AA /* XCRemoteSwiftPackageReference "HAKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/home-assistant/HAKit";
+			repositoryURL = "https://github.com/LeoSM-07/HAKit";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.2;
+				branch = main;
+				kind = branch;
 			};
 		};
 		42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */ = {
@@ -524,9 +524,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		42A38F8F28EA219D00D669D3 /* HAKit */ = {
+		428F291528EE22DA006728AA /* HAKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */;
+			package = 428F291428EE22DA006728AA /* XCRemoteSwiftPackageReference "HAKit" */;
 			productName = HAKit;
 		};
 		42CA9BEB28ED608F00B53C9E /* SlideOverCard */ = {

@@ -1,6 +1,6 @@
 #  HAConnect
 
-A native iOS app that communicates with your HomeAssistance instance via it's built in API.
+A native iOS app that communicates with your HomeAssistance instance via it's built in API. Still only at a prototype stage.
 
 ## Todo
 - [x] Setup & Websocket Networking

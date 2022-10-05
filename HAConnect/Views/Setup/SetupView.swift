@@ -5,6 +5,8 @@
 // Created by LeoSM_07 on 10/4/22.
 //
 
+import CodeScanner
+import SlideOverCard
 import SwiftUI
 
 struct SetupView: View {
@@ -22,6 +24,9 @@ struct SetupView: View {
     @State var errorMessage = ""
     @State var showErrorAlert = false
     
+    @FocusState private var tokenFocused: Bool
+    @State private var showingQRScanner = false
+    
     var body: some View {
         NavigationView {
             Form {
@@ -33,6 +38,18 @@ struct SetupView: View {
                 
                 Section() {
                     SecureField("Token", text: $tokenField, prompt: Text("Token"))
+                        .focused($tokenFocused)
+                        .overlay {
+                            Button {
+                                tokenFocused = false
+                                showingQRScanner.toggle()
+                            } label: {
+                                Image(systemName: "qrcode")
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .buttonStyle(.borderless)
+
+                        }
                 } header: {
                     Text("Long-Lived Access Token")
                 } footer: {
@@ -80,6 +97,26 @@ struct SetupView: View {
             .tint(.accentColor)
             .navigationTitle("Connect HA")
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .slideOverCard(isPresented: $showingQRScanner, options: []) {
+            VStack {
+                Text("Scan QR Code").font(.system(size: 28, weight: .bold))
+                Text("Scan your long-lived access token")
+                
+                CodeScannerView(
+                    codeTypes: [.qr],
+                    showViewfinder: false,
+                    shouldVibrateOnSuccess: false,
+                    completion: { result in
+                        if case let .success(code) = result {
+                            self.tokenField = code.string
+                            self.showingQRScanner = false
+                            hapticResponse(.success)
+                        }
+                    }
+                )
+                .cornerRadius(25)
+            }.frame(height: 350)
         }
     }
     

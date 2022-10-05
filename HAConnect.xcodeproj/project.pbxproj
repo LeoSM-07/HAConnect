@@ -26,6 +26,8 @@
 		42CA9BE328ED3B8800B53C9E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CA9BE228ED3B8800B53C9E /* String.swift */; };
 		42CA9BE628ED500A00B53C9E /* SetupViewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CA9BE528ED500A00B53C9E /* SetupViewLogic.swift */; };
 		42CA9BE828ED55A600B53C9E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CA9BE728ED55A600B53C9E /* LocationManager.swift */; };
+		42CA9BEC28ED608F00B53C9E /* SlideOverCard in Frameworks */ = {isa = PBXBuildFile; productRef = 42CA9BEB28ED608F00B53C9E /* SlideOverCard */; };
+		42CA9BEF28ED60D900B53C9E /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 42CA9BEE28ED60D900B53C9E /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42CA9BEC28ED608F00B53C9E /* SlideOverCard in Frameworks */,
 				42A38F9028EA219D00D669D3 /* HAKit in Frameworks */,
+				42CA9BEF28ED60D900B53C9E /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +201,8 @@
 			name = HAConnect;
 			packageProductDependencies = (
 				42A38F8F28EA219D00D669D3 /* HAKit */,
+				42CA9BEB28ED608F00B53C9E /* SlideOverCard */,
+				42CA9BEE28ED60D900B53C9E /* CodeScanner */,
 			);
 			productName = HAConnect;
 			productReference = 42A38F7D28EA121300D669D3 /* HAConnect.app */;
@@ -228,6 +234,8 @@
 			mainGroup = 42A38F7428EA121300D669D3;
 			packageReferences = (
 				42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */,
+				42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */,
+				42CA9BED28ED60D900B53C9E /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 42A38F7E28EA121300D669D3 /* Products */;
 			projectDirPath = "";
@@ -404,6 +412,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HAConnect/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera for QR-Ccde scanning";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "HAConnect must access your location to get your wIfi SSID";
 				INFOPLIST_KEY_NSLocationUsageDescription = "HAConnect must access your location to get your wIfi SSID";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "HAConnect must access your location to get your WIfi SSID";
@@ -438,6 +447,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HAConnect/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access the camera for QR-Ccde scanning";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "HAConnect must access your location to get your wIfi SSID";
 				INFOPLIST_KEY_NSLocationUsageDescription = "HAConnect must access your location to get your wIfi SSID";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "HAConnect must access your location to get your WIfi SSID";
@@ -491,6 +501,22 @@
 				minimumVersion = 0.2.2;
 			};
 		};
+		42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joogps/SlideOverCard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		42CA9BED28ED60D900B53C9E /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -498,6 +524,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42A38F8E28EA219D00D669D3 /* XCRemoteSwiftPackageReference "HAKit" */;
 			productName = HAKit;
+		};
+		42CA9BEB28ED608F00B53C9E /* SlideOverCard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */;
+			productName = SlideOverCard;
+		};
+		42CA9BEE28ED60D900B53C9E /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42CA9BED28ED60D900B53C9E /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

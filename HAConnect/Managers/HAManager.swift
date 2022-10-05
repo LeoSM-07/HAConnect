@@ -21,12 +21,6 @@ extension Dictionary {
     }
 }
 
-struct RoomItem: Identifiable {
-    let id = UUID()
-    var roomId: String
-    var roomName: String
-}
-
 func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
     var buffer = [T]()
     var added = Set<T>()
@@ -39,9 +33,37 @@ func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Eleme
     return buffer
 }
 
+struct RoomItem: Identifiable {
+    let id = UUID()
+    var isActive: Bool = true
+    var roomId: String
+    var roomName: String
+    var imageURL: String?
+
+}
+
+
+
 class HAKitViewModel: ObservableObject {
     
     @EnvironmentObject var appSettings: AppSettings
+    
+    @Published var entities: [HAEntity] = []
+    @Published var roomIdList: [RoomItem] = [
+        RoomItem(roomId: "leo_s_bedroom", roomName: "Léo Bedroom"),
+        RoomItem(roomId: "our_bedroom", roomName: "Parent's Bedroom"),
+        RoomItem(roomId: "couch", roomName: "Parent's Bedroom")
+    ]
+    @Published var roomEntityList: [[String]] = []
+    @Published var user: HAResponseCurrentUser = HAResponseCurrentUser(
+        id: "",
+        name: "",
+        isOwner: false,
+        isAdmin: false,
+        credentials: [HAResponseCurrentUser.Credential(type: "", id: "")],
+        mfaModules: [HAResponseCurrentUser.MFAModule(id: "", name: "", isEnabled: false)]
+    )
+    @Published var userImagePath: String = ""
 
     init() {
         getUser()
@@ -113,13 +135,8 @@ class HAKitViewModel: ObservableObject {
             }
         }
     }
-//"Léo Bedroom", "Our Bedroom", "Couch"
-    @Published var roomIdList: [RoomItem] = [
-        RoomItem(roomId: "leo_s_bedroom", roomName: "Léo Bedroom"),
-        RoomItem(roomId: "our_bedroom", roomName: "Parent's Bedroom"),
-        RoomItem(roomId: "couch", roomName: "Parent's Bedroom")
-    ]
-    @Published var roomEntityList: [[String]] = []
+
+
 
     func getRoomEntities() {
 
@@ -164,15 +181,7 @@ class HAKitViewModel: ObservableObject {
         }
     }
 
-    @Published var user: HAResponseCurrentUser = HAResponseCurrentUser(
-        id: "",
-        name: "",
-        isOwner: false,
-        isAdmin: false,
-        credentials: [HAResponseCurrentUser.Credential(type: "", id: "")],
-        mfaModules: [HAResponseCurrentUser.MFAModule(id: "", name: "", isEnabled: false)]
-    )
-    @Published var userImagePath: String = ""
+
 
     func getUserImagePath() {
         connection.subscribe(
@@ -192,18 +201,4 @@ class HAKitViewModel: ObservableObject {
             HAEntity.domain
         }))
     }
-
-    @Published var entities: [HAEntity] = []
-
-    func testWS() {
-        
-        connection.send(.getAreas()) { result in
-            print(result.map({ test in
-                test.map { area in
-                    area.name
-                }
-            }))
-        }
-    }
-    
 }

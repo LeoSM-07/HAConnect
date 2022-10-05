@@ -13,7 +13,7 @@
 		423991AA28EA5BD50022F1C4 /* EntityIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991A928EA5BD50022F1C4 /* EntityIcon.swift */; };
 		423991AC28EA5C080022F1C4 /* LightBrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AB28EA5C080022F1C4 /* LightBrightnessSlider.swift */; };
 		423991AE28EA5CCA0022F1C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AD28EA5CCA0022F1C4 /* SettingsView.swift */; };
-		428F291628EE22DA006728AA /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 428F291528EE22DA006728AA /* HAKit */; };
+		428F291928EE2562006728AA /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 428F291828EE2562006728AA /* HAKit */; };
 		42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8028EA121300D669D3 /* HAConnectApp.swift */; };
 		42A38F8328EA121300D669D3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8228EA121300D669D3 /* RootView.swift */; };
 		42A38F8528EA121400D669D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8428EA121400D669D3 /* Assets.xcassets */; };
@@ -61,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				428F291628EE22DA006728AA /* HAKit in Frameworks */,
+				428F291928EE2562006728AA /* HAKit in Frameworks */,
 				42CA9BEC28ED608F00B53C9E /* SlideOverCard in Frameworks */,
 				42CA9BEF28ED60D900B53C9E /* CodeScanner in Frameworks */,
 			);
@@ -206,7 +206,7 @@
 			packageProductDependencies = (
 				42CA9BEB28ED608F00B53C9E /* SlideOverCard */,
 				42CA9BEE28ED60D900B53C9E /* CodeScanner */,
-				428F291528EE22DA006728AA /* HAKit */,
+				428F291828EE2562006728AA /* HAKit */,
 			);
 			productName = HAConnect;
 			productReference = 42A38F7D28EA121300D669D3 /* HAConnect.app */;
@@ -239,7 +239,7 @@
 			packageReferences = (
 				42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */,
 				42CA9BED28ED60D900B53C9E /* XCRemoteSwiftPackageReference "CodeScanner" */,
-				428F291428EE22DA006728AA /* XCRemoteSwiftPackageReference "HAKit" */,
+				428F291728EE2562006728AA /* XCRemoteSwiftPackageReference "HAKit" */,
 			);
 			productRefGroup = 42A38F7E28EA121300D669D3 /* Products */;
 			projectDirPath = "";
@@ -497,7 +497,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		428F291428EE22DA006728AA /* XCRemoteSwiftPackageReference "HAKit" */ = {
+		428F291728EE2562006728AA /* XCRemoteSwiftPackageReference "HAKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/LeoSM-07/HAKit";
 			requirement = {
@@ -524,9 +524,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		428F291528EE22DA006728AA /* HAKit */ = {
+		428F291828EE2562006728AA /* HAKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 428F291428EE22DA006728AA /* XCRemoteSwiftPackageReference "HAKit" */;
+			package = 428F291728EE2562006728AA /* XCRemoteSwiftPackageReference "HAKit" */;
 			productName = HAKit;
 		};
 		42CA9BEB28ED608F00B53C9E /* SlideOverCard */ = {

@@ -52,6 +52,7 @@
 		42CA9BE528ED500A00B53C9E /* SetupViewLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewLogic.swift; sourceTree = "<group>"; };
 		42CA9BE728ED55A600B53C9E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		42CA9BE928ED5F1400B53C9E /* HAConnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HAConnect.entitlements; sourceTree = "<group>"; };
+		42CA9BF028ED67CD00B53C9E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +99,7 @@
 		42A38F7428EA121300D669D3 = {
 			isa = PBXGroup;
 			children = (
+				42CA9BF028ED67CD00B53C9E /* README.md */,
 				42A38F7F28EA121300D669D3 /* HAConnect */,
 				42A38F7E28EA121300D669D3 /* Products */,
 			);

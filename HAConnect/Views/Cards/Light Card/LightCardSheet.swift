@@ -13,6 +13,7 @@ struct LightsSheetView: View {
     @Environment(\.dismiss) private var dismiss
 
     @EnvironmentObject var homeAssistant: HAKitViewModel
+    @EnvironmentObject var appSettings: AppSettings
 
     let originalEntityId: String
 
@@ -72,7 +73,7 @@ struct LightsSheetView: View {
                 LightsColorPicker(originalEntityId)
 
                 LazyVGrid(columns: columns) {
-                    ForEach(AppSecrets().favoriteColors) { fav in
+                    ForEach(appSettings.favoriteColors) { fav in
                         Button {
                             homeAssistant.callService(
                                 id: originalEntityId,
@@ -112,6 +113,9 @@ struct LightsSheetView: View {
         .navigationTitle("")
     }
 }
+
+// Modified Color Picker From Priva28
+// https://github.com/Priva28/SwiftUIColourWheel
 
 // MARK: - Light Color Picker
 struct LightsColorPicker: View {

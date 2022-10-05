@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct RootView: View {
+    
+    @StateObject var homeAssistant = HAKitViewModel()
+    
     var body: some View {
         DashboardView()
+            .environmentObject(homeAssistant)
     }
 }
 

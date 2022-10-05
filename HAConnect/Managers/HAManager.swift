@@ -22,6 +22,8 @@ extension Dictionary {
 }
 
 class HAKitViewModel: ObservableObject {
+    
+    @EnvironmentObject var appSettings: AppSettings
 
     init() {
         getUser()
@@ -34,12 +36,12 @@ class HAKitViewModel: ObservableObject {
         connectionInfo: {
             // Connection is required to be returned synchronously.
             // In a real implementation, handle both URL/connection info without crashing.
-            try! .init(url: URL(string: AppSecrets().url)!)
+            try! .init(url: AppSettings().useableURL!)
         },
         fetchAuthToken: { completion in
             // Access tokens are retrieved asynchronously, but be aware that Home Assistant
             // has a timeout of 10 seconds for sending your access token.
-            completion(.success(AppSecrets().token))
+            completion(.success(AppSettings().token))
         }
     ))
 

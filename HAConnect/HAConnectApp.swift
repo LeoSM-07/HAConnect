@@ -10,12 +10,20 @@ import SwiftUI
 @main
 struct HAConnectApp: App {
 
-    @StateObject var homeAssistant = HAKitViewModel()
+    @StateObject var appSettings = AppSettings()
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(homeAssistant)
+            
+            if appSettings.setupComplete {
+                RootView()
+                    .environmentObject(appSettings)
+            } else {
+                SetupView()
+                    .environmentObject(appSettings)
+            }
+            
+
         }
     }
 }

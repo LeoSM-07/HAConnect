@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SetupView: View {
     
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appSettings: AppSettings
     
     @State var internalURLField: String = "http://homeassistant.local:8123/"
@@ -47,14 +48,20 @@ struct SetupView: View {
                 }
             }
             .onChange(of: errorMessage, perform: { newValue in
-                showErrorAlert = true
+                if newValue != "" {
+                    showErrorAlert = true
+                }
             })
             .alert(isPresented: $showErrorAlert) {
                 Alert(
                     title: Text("Error"),
                     message: Text(errorMessage),
                     dismissButton: Alert.Button.default(
-                        Text("OK"), action: { isCheckingFields = false }
+                        Text("OK"), action: {
+                            errorMessage = ""
+                            isCheckingFields = false
+
+                        }
                     )
                 )
             }
@@ -98,13 +105,64 @@ struct SetupView: View {
     }
     
     func checkFields() {
+        print("Current error: \(errorMessage)")
         isCheckingFields = true
         if !internalURLField.isValidURL {
             errorMessage = "Internal URL is invalid!"
+            print(errorMessage)
             return
-        } else if !externalURLField.isValidURL {
+        } else if !externalURLField.isValidURL && externalURLField != "" {
             errorMessage = "External URL is invalid!"
+            print(errorMessage)
             return
+        } else if tokenField == "" {
+            errorMessage = "Long-lived access Token is blank!"
+            print(errorMessage)
+            return
+        } else {
+            checkSession(url: internalURLField) { result in
+                if result == "REQUEST_TIMEOUT"{
+                    errorMessage = "The Internal URL timed out."
+                    print(errorMessage)
+                    return
+                } else if result == "CONNECTION_ERROR" {
+                    errorMessage = "Could not connect to Internal URL."
+                    print(errorMessage)
+                    return
+                } else if result == "INVALID_TOKEN" {
+                    errorMessage = "Token was not valid"
+                    print(errorMessage)
+                    return
+                } else {
+                    if externalURLField != "" {
+                        checkSession(url: externalURLField) { result in
+                            if result == "REQUEST_TIMEOUT"{
+                                errorMessage = "The External URL timed out."
+                                print(errorMessage)
+                                return
+                            } else if result == "CONNECTION_ERROR" {
+                                errorMessage = "Could not connect to External URL."
+                                print(errorMessage)
+                                return
+                            } else if result == "INVALID_TOKEN" {
+                                errorMessage = "Token was not valid"
+                                print(errorMessage)
+                                return
+                            } else {
+                                print("SETTINGS CONFIRMED")
+                                appSettings.internalURL = internalURLField
+                                appSettings.externalURL = externalURLField
+                                appSettings.token = tokenField
+                                appSettings.wifiKeyword = wifiKeywordField
+                                appSettings.externalURLOnly = useExternalOnly
+                                isCheckingFields = false
+                                dismiss()
+                                return
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

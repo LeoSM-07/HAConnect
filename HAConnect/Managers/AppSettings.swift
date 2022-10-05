@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import SystemConfiguration.CaptiveNetwork
+
+enum WifiStatus: String {
+    case onLocal = "Connected To Local"
+    case onExternal = "Not Connected To Local"
+}
 
 class AppSettings: ObservableObject {
     
-    @AppStorage("ha_internal_url") var internalURL: String = ""
+    @AppStorage("ha_internal_url") var internalURL: String = "http://homeassistant.local:8123/"
     @AppStorage("ha_external_url") var externalURL: String = ""
     @AppStorage("ha_user_token") var token: String = ""
     @AppStorage("user_wifi_keyword") var wifiKeyword: String = ""
@@ -22,6 +28,7 @@ class AppSettings: ObservableObject {
     var setupComplete: Bool {
         if internalURL == "" || token == "" { return false } else { return true }
     }
+    
     @Published var favoriteColors: [FavColor] = [
         FavColor(rgbValue: [255, 205, 120]),
         FavColor(rgbValue: [255, 254, 250]),
@@ -30,20 +37,66 @@ class AppSettings: ObservableObject {
         FavColor(rgbValue: [255, 172, 41]),
         FavColor(rgbValue: [255, 94, 79])
     ]
+    @Published var wifiStatus: WifiStatus
     
-    var useableURLString: String {
-// MARK: TODO
-        return externalURL
+    init() {
+        var ssid: String?
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                // swiftlint:disable force_cast
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+        }
+        // swiftlint:disable control_statement
+        if ((ssid?.contains("Cosmos")) != nil) {
+            wifiStatus = .onLocal
+        } else {
+            wifiStatus = .onExternal
+        }
+    }
+    
+    func getWiFiSSID() -> String {
+
+        LocationManager().requestAuthorization()
+
+        var SSID: String?
+
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+
+                // swiftlint:disable force_cast
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    SSID = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+
+        }
+
+        return SSID ?? "Unknown"
     }
     
     var useableURL: URL? {
         return URL(string: useableURLString)
     }
     
-    init() {
-        
+    var useableURLString: String {
+        if getWiFiSSID().contains(wifiKeyword) && !externalURLOnly {
+            return internalURL
+        } else if externalURL == "" {
+            return internalURL
+        } else {
+            return externalURL
+        }
     }
+    
 }
+
+
+
 
 struct FavColor: Hashable, Identifiable {
     var id = UUID()

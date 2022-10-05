@@ -10,13 +10,22 @@ import SwiftUI
 struct SettingsView: View {
 
     @EnvironmentObject var homeAssistant: HAKitViewModel
+    @EnvironmentObject var appSettings: AppSettings
 
     var body: some View {
         NavigationView {
             List {
+                SettingsListItem("Current SSID", appSettings.getWiFiSSID())
+                SettingsListItem("Current URL", appSettings.useableURLString)
+                NavigationLink("Reconfigure HomeAssistant") {
+                    SetupView()
+                        .navigationBarBackButtonHidden(true)
+                        .interactiveDismissDisabled(true)
+                }
+                .foregroundColor(.accentColor)
+                
                 Section("Areas") {
                     ForEach(homeAssistant.roomIdList) { item in
-
                         NavigationLink(item.roomName) {
                             RoomEditView(roomItem: item)
                         }
@@ -29,6 +38,28 @@ struct SettingsView: View {
         }
         .task {
             homeAssistant.getUserImagePath()
+        }
+    }
+}
+
+struct SettingsListItem: View {
+    
+    let headlineText: String
+    var bodyText: String
+    
+    init (_ headline: String, _ body: String) {
+        self.headlineText = headline
+        self.bodyText = body
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(headlineText)
+            .foregroundColor(.secondary)
+            .font(.footnote)
+            
+            Text(bodyText)
+                .lineLimit(1)
         }
     }
 }

@@ -10,8 +10,9 @@ import SwiftUI
 
 
 struct DashboardView: View {
-
+    @EnvironmentObject var appSettigs: AppSettings
     @EnvironmentObject var homeAssistant: HAKitViewModel
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -64,6 +65,10 @@ struct DashboardView: View {
                 }
             }
         }
+        .sheet(isPresented: $appSettigs.needsRoomSetup, content: {
+            RoomSetupView()
+                .interactiveDismissDisabled()
+        })
         .sheet(isPresented: $showSettingsSheet) {
             SettingsView()
         }

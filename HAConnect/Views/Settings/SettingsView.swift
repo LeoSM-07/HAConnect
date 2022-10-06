@@ -25,7 +25,7 @@ struct SettingsView: View {
                 .foregroundColor(.accentColor)
                 
                 Section("Areas") {
-                    ForEach(homeAssistant.roomIdList) { item in
+                    ForEach(homeAssistant.roomList) { item in
                         NavigationLink(item.roomName) {
                             RoomEditView(roomItem: item)
                         }

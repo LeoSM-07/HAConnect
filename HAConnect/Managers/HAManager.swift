@@ -33,8 +33,8 @@ func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Eleme
     return buffer
 }
 
-struct RoomItem: Identifiable {
-    let id = UUID()
+struct RoomItem: Identifiable, Codable {
+    var id = UUID()
     var isActive: Bool = true
     var roomId: String
     var roomName: String
@@ -42,18 +42,11 @@ struct RoomItem: Identifiable {
 
 }
 
-
-
 class HAKitViewModel: ObservableObject {
     
-    @EnvironmentObject var appSettings: AppSettings
+    let appSettings = AppSettings()
     
     @Published var entities: [HAEntity] = []
-    @Published var roomIdList: [RoomItem] = [
-        RoomItem(roomId: "leo_s_bedroom", roomName: "Léo Bedroom"),
-        RoomItem(roomId: "our_bedroom", roomName: "Parent's Bedroom"),
-        RoomItem(roomId: "couch", roomName: "Parent's Bedroom")
-    ]
     @Published var roomEntityList: [[String]] = []
     @Published var user: HAResponseCurrentUser = HAResponseCurrentUser(
         id: "",
@@ -64,12 +57,27 @@ class HAKitViewModel: ObservableObject {
         mfaModules: [HAResponseCurrentUser.MFAModule(id: "", name: "", isEnabled: false)]
     )
     @Published var userImagePath: String = ""
+    @Published var roomList: [RoomItem] = [ ]
+    @AppStorage("roomList_storage") private var roomListData: Data = Data()
+    
+    func decodeRoomList() {
+        if let newRoomList = try? JSONDecoder().decode([RoomItem].self, from: roomListData) {
+                self.roomList = newRoomList
+        }
+    }
+    
+    func saveRoomList() {
+        guard let newroomList = try? JSONEncoder().encode(roomList) else { return }
+        self.roomListData = newroomList
+    }
 
     init() {
         getUser()
         getEntities()
         getRoomEntities()
         subscribeToChanges()
+        populateRoomList()
+        decodeRoomList()
     }
 
     let connection = HAKit.connection(configuration: .init(
@@ -136,28 +144,50 @@ class HAKitViewModel: ObservableObject {
         }
     }
 
-
-
+    func populateRoomList() {
+        connection.send(.getAreas()) { result in
+            switch result {
+            case let .success(result):
+                
+                self.roomList = result.map({ room in
+                    RoomItem(
+                        isActive: true,
+                        roomId: room.id,
+                        roomName: room.name,
+                        imageURL: room.picture
+                    )
+                })
+                print("Room List: \(self.roomList)")
+                self.getRoomEntities()
+                
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    
     func getRoomEntities() {
-
+        
         var templateText = "{{ area_entities('"
-        templateText.append(roomIdList.map({ $0.roomId }).joined(separator: "') }},{{ area_entities('"))
+        templateText.append(roomList.map({ $0.roomId }).joined(separator: "') }},{{ area_entities('"))
         templateText.append("') }}")
-
+        
         print("Attempting to print area...")
         connection.subscribe(
             to: .renderTemplate(templateText),
             initiated: { result in },
             handler: {cancelToken, response in
-                // the overall response is parsed for type, but native template rendering means
-                // the rendered type will be a Dictionary, Array, etc.
+                
                 if let object = response.result as? [[String]] {
                     self.roomEntityList = object
+                    print("Room Entity List: \(self.roomEntityList)")
                 }
                 cancelToken.cancel()
             }
         )
     }
+ 
 
     func subscribeToChanges() {
         connection.subscribe(
@@ -180,8 +210,6 @@ class HAKitViewModel: ObservableObject {
             self.entities[row].state = new
         }
     }
-
-
 
     func getUserImagePath() {
         connection.subscribe(

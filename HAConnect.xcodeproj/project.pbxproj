@@ -14,6 +14,7 @@
 		423991AC28EA5C080022F1C4 /* LightBrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AB28EA5C080022F1C4 /* LightBrightnessSlider.swift */; };
 		423991AE28EA5CCA0022F1C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AD28EA5CCA0022F1C4 /* SettingsView.swift */; };
 		428F291928EE2562006728AA /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 428F291828EE2562006728AA /* HAKit */; };
+		428F291B28EE2C16006728AA /* RoomSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428F291A28EE2C16006728AA /* RoomSetupView.swift */; };
 		42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8028EA121300D669D3 /* HAConnectApp.swift */; };
 		42A38F8328EA121300D669D3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8228EA121300D669D3 /* RootView.swift */; };
 		42A38F8528EA121400D669D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8428EA121400D669D3 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		423991A928EA5BD50022F1C4 /* EntityIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIcon.swift; sourceTree = "<group>"; };
 		423991AB28EA5C080022F1C4 /* LightBrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBrightnessSlider.swift; sourceTree = "<group>"; };
 		423991AD28EA5CCA0022F1C4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		428F291A28EE2C16006728AA /* RoomSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSetupView.swift; sourceTree = "<group>"; };
 		42A38F7D28EA121300D669D3 /* HAConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HAConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A38F8028EA121300D669D3 /* HAConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HAConnectApp.swift; sourceTree = "<group>"; };
 		42A38F8228EA121300D669D3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				42CA9BE028ED354600B53C9E /* SetupView.swift */,
 				42CA9BE528ED500A00B53C9E /* SetupViewLogic.swift */,
+				428F291A28EE2C16006728AA /* RoomSetupView.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				423991A528EA40400022F1C4 /* Haptics.swift in Sources */,
 				42CA9BDD28ED2FBD00B53C9E /* LightCardSheet.swift in Sources */,
 				42A38F9528EA223200D669D3 /* AppSettings.swift in Sources */,
+				428F291B28EE2C16006728AA /* RoomSetupView.swift in Sources */,
 				423991AA28EA5BD50022F1C4 /* EntityIcon.swift in Sources */,
 				423991A028EA2ECE0022F1C4 /* ColorHelpers.swift in Sources */,
 				423991A328EA3B350022F1C4 /* LightCard.swift in Sources */,

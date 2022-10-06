@@ -13,6 +13,21 @@ enum WifiStatus: String {
     case onExternal = "Not Connected To Local"
 }
 
+struct FavColor: Hashable, Identifiable {
+    var id = UUID()
+    var rgbValue: [Int]
+    var color: Color {
+        convertRGB(rgbValue)
+    }
+
+    private func convertRGB(_ numbers: [Int]?) -> Color {
+        return Color(red: Double((numbers?[0] ?? 128))/255,
+                     green: Double((numbers?[1] ?? 128))/255,
+                     blue: Double((numbers?[2] ?? 128))/255
+        )
+    }
+}
+
 class AppSettings: ObservableObject {
     
     @AppStorage("ha_internal_url") var internalURL: String = "http://homeassistant.local:8123/"
@@ -20,15 +35,8 @@ class AppSettings: ObservableObject {
     @AppStorage("ha_user_token") var token: String = ""
     @AppStorage("user_wifi_keyword") var wifiKeyword: String = ""
     @AppStorage("user_external_only") var externalURLOnly: Bool = false
+    @AppStorage("user_completed_room_setup") var needsRoomSetup: Bool = true
 
-//    let url = "http://homeassistant.local:8123"
-//    let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI2M2YzMmY5ZmVkNTE0ZGE4OTNlNGFmOTAzNTFiMWZhMyIsImlhdCI6MTY2NDc0NjAwMywiZXhwIjoxOTgwMTA2MDAzfQ.svmRm8YC0Oh5VdqA3WJunSlDTNb1PUlj9HxGMjnQd9w"
-
-
-    var setupComplete: Bool {
-        if internalURL == "" || token == "" { return false } else { return true }
-    }
-    
     @Published var favoriteColors: [FavColor] = [
         FavColor(rgbValue: [255, 205, 120]),
         FavColor(rgbValue: [255, 254, 250]),
@@ -38,6 +46,10 @@ class AppSettings: ObservableObject {
         FavColor(rgbValue: [255, 94, 79])
     ]
     @Published var wifiStatus: WifiStatus
+    
+    var setupComplete: Bool {
+        if internalURL == "" || token == "" { return false } else { return true }
+    }
     
     init() {
         var ssid: String?
@@ -93,22 +105,4 @@ class AppSettings: ObservableObject {
         }
     }
     
-}
-
-
-
-
-struct FavColor: Hashable, Identifiable {
-    var id = UUID()
-    var rgbValue: [Int]
-    var color: Color {
-        convertRGB(rgbValue)
-    }
-
-    private func convertRGB(_ numbers: [Int]?) -> Color {
-        return Color(red: Double((numbers?[0] ?? 128))/255,
-                     green: Double((numbers?[1] ?? 128))/255,
-                     blue: Double((numbers?[2] ?? 128))/255
-        )
-    }
 }

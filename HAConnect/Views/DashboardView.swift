@@ -72,7 +72,9 @@ struct DashboardView: View {
         .sheet(isPresented: $showSettingsSheet) {
             SettingsView()
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
+    
 }
 
 struct DashboardView_Previews: PreviewProvider {

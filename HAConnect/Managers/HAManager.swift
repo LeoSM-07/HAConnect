@@ -37,7 +37,7 @@ struct RoomItem: Identifiable, Codable {
     var id = UUID()
     var isActive: Bool = true
     var roomId: String
-    var roomName: String
+    var roomName: String    
     var imageURL: String?
 
 }

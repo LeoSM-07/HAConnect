@@ -24,18 +24,27 @@ struct DashboardView: View {
     var body: some View {
         NavigationView {
             ScrollView {
+                Button("Print Room List") {
+                    print(homeAssistant.roomList)
+                    print(homeAssistant.roomListData)
+                }
                 LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(Array(homeAssistant.roomEntityList.enumerated()), id: \.element) { index, entityList in
-                        Section{
-                            ForEach(entityList, id: \.self) { entityId in
-                                if entityId.contains("light.") {
-                                    LightCard(originalEntityId: entityId, sliders: $showSliders)
+                    ForEach(Array(homeAssistant.roomList.enumerated()), id: \.element) { index, room in
+                        if room.isActive {
+                            Section{
+                                ForEach(room.entities, id: \.self) { entityId in
+                                    if entityId.contains("light.") {
+                                        LightCard(originalEntityId: entityId, sliders: $showSliders)
+                                    }
                                 }
-                            }
-                        } header: {
-                            Divider()
-                        }
+                            } header: {
+                                VStack(alignment: .leading) {
+                                    Text(room.roomName)
+                                    Divider()
+                                }
 
+                            }
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -72,6 +81,9 @@ struct DashboardView: View {
         .sheet(isPresented: $showSettingsSheet) {
             SettingsView()
         }
+        .onChange(of: showSettingsSheet, perform: { v in
+            if v == false { homeAssistant.saveRoomList() }
+        })
         .navigationViewStyle(StackNavigationViewStyle())
     }
     

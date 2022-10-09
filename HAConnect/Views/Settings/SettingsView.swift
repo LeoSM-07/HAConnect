@@ -25,9 +25,16 @@ struct SettingsView: View {
                 .foregroundColor(.accentColor)
                 
                 Section("Areas") {
-                    ForEach(homeAssistant.roomList) { item in
-                        NavigationLink(item.roomName) {
-                            RoomEditView(roomItem: item)
+                    ForEach(Array(homeAssistant.roomList.enumerated()), id: \.offset) { index, room in
+                        
+                        HStack {
+                            Button {
+                                homeAssistant.roomList[index].isActive.toggle()
+                            } label: {
+                                Image(systemName: room.isActive ? "checkmark.circle.fill" : "circle")
+                            }
+
+                            Text(room.roomName)
                         }
                     }
                 }

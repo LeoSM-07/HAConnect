@@ -18,11 +18,19 @@ struct RoomSetupView: View {
         NavigationView {
             List {
                 Section {
-                    ForEach(homeAssistant.roomList) { room in
-                        VStack(alignment: .leading) {
+                    ForEach(Array(homeAssistant.roomList.enumerated()), id: \.offset) { index, room in
+                        HStack {
+                            Button {
+                                homeAssistant.roomList[index].isActive.toggle()
+                            } label: {
+                                Image(systemName: room.isActive ? "checkmark.circle.fill" : "circle")
+                            }
+
                             Text(room.roomName)
                         }
                     }
+                } header: {
+                    Text("Select Areas")
                 } footer: {
                     Text("Select which areas you would like to be present in HAConnect.")
                 }
@@ -39,6 +47,7 @@ struct RoomSetupView: View {
             .scrollContentBackground(.hidden)
             .background(Color("MainBackground"))
             .navigationTitle("Room Setup")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

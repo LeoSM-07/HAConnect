@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct RootView: View {
-    
+    @Environment(\.scenePhase) var scenePhase
     @StateObject var homeAssistant = HAKitViewModel()
+
     
     var body: some View {
         DashboardView()
+            .onChange(of: scenePhase, perform: { newValue in
+                if newValue == .background {
+                    homeAssistant.saveRoomList()
+                }
+            })
             .environmentObject(homeAssistant)
     }
 }

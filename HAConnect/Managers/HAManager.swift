@@ -188,8 +188,7 @@ class HAKitViewModel: ObservableObject {
             handler: {cancelToken, response in
                 
                 if let object = response.result as? [[String]] {
-//                    self.roomEntityList = object
-                    print("Returned list \(object)")
+//                    print("Returned list \(object)"
                     for (index, array) in object.enumerated(){
                         self.roomList[index].entities = array
                     }

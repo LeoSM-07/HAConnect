@@ -8,6 +8,13 @@
 import HAKit
 import SwiftUI
 
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}
 
 struct DashboardView: View {
     @EnvironmentObject var appSettigs: AppSettings
@@ -24,26 +31,29 @@ struct DashboardView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                Button("Print Room List") {
-                    print(homeAssistant.roomList)
-                    print(homeAssistant.roomListData)
-                }
-                LazyVGrid(columns: columns, spacing: 10) {
+                Grid(horizontalSpacing: 10, verticalSpacing: 10) {
                     ForEach(Array(homeAssistant.roomList.enumerated()), id: \.element) { index, room in
-                        if room.isActive {
-                            Section{
-                                ForEach(room.entities, id: \.self) { entityId in
-                                    if entityId.contains("light.") {
-                                        LightCard(originalEntityId: entityId, sliders: $showSliders)
-                                    }
-                                }
-                            } header: {
-                                VStack(alignment: .leading) {
-                                    Text(room.roomName)
-                                    Divider()
-                                }
+                        let lightsArrayModified = room.entities.filter { $0.starts(with: "light.") }.chunked(into: 2)
 
+                        Text(room.roomName)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                        if room.entities.contains(where: { $0.starts(with: "scene.") }) {
+                            GridRow {
+                                Text("Scenes Here")
+                                    .cardStyle()
+                                    .gridCellColumns(2)
                             }
+                        }
+
+                        ForEach(lightsArrayModified, id: \.self) { array in
+                            GridRow {
+                                ForEach(array, id: \.self) { entity in
+                                    LightCard(originalEntityId: entity, sliders: $showSliders)
+                                }
+                            }
+                            .frame(height: 120)
                         }
                     }
                 }

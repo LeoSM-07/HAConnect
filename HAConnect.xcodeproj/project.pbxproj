@@ -13,8 +13,9 @@
 		423991AA28EA5BD50022F1C4 /* EntityIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991A928EA5BD50022F1C4 /* EntityIcon.swift */; };
 		423991AC28EA5C080022F1C4 /* LightBrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AB28EA5C080022F1C4 /* LightBrightnessSlider.swift */; };
 		423991AE28EA5CCA0022F1C4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423991AD28EA5CCA0022F1C4 /* SettingsView.swift */; };
-		428F291928EE2562006728AA /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 428F291828EE2562006728AA /* HAKit */; };
-		428F291B28EE2C16006728AA /* RoomSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428F291A28EE2C16006728AA /* RoomSetupView.swift */; };
+		4251419029501C3F00E0C75B /* HAKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4251418F29501C3F00E0C75B /* HAKit */; };
+		4251419329501CA500E0C75B /* RoomItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4251419229501CA500E0C75B /* RoomItem.swift */; };
+		4251419829501DB400E0C75B /* RoomSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4251419729501DB400E0C75B /* RoomSetupView.swift */; };
 		42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8028EA121300D669D3 /* HAConnectApp.swift */; };
 		42A38F8328EA121300D669D3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A38F8228EA121300D669D3 /* RootView.swift */; };
 		42A38F8528EA121400D669D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A38F8428EA121400D669D3 /* Assets.xcassets */; };
@@ -38,7 +39,10 @@
 		423991A928EA5BD50022F1C4 /* EntityIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIcon.swift; sourceTree = "<group>"; };
 		423991AB28EA5C080022F1C4 /* LightBrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBrightnessSlider.swift; sourceTree = "<group>"; };
 		423991AD28EA5CCA0022F1C4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		428F291A28EE2C16006728AA /* RoomSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSetupView.swift; sourceTree = "<group>"; };
+		4251418D29501ACD00E0C75B /* HAKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HAKit; path = ../HAKit; sourceTree = "<group>"; };
+		4251419229501CA500E0C75B /* RoomItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomItem.swift; sourceTree = "<group>"; };
+		4251419729501DB400E0C75B /* RoomSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSetupView.swift; sourceTree = "<group>"; };
+		428F291A28EE2C16006728AA /* RoomSetupViewLegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSetupViewLegacy.swift; sourceTree = "<group>"; };
 		42A38F7D28EA121300D669D3 /* HAConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HAConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42A38F8028EA121300D669D3 /* HAConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HAConnectApp.swift; sourceTree = "<group>"; };
 		42A38F8228EA121300D669D3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -63,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				428F291928EE2562006728AA /* HAKit in Frameworks */,
+				4251419029501C3F00E0C75B /* HAKit in Frameworks */,
 				42CA9BEC28ED608F00B53C9E /* SlideOverCard in Frameworks */,
 				42CA9BEF28ED60D900B53C9E /* CodeScanner in Frameworks */,
 			);
@@ -99,13 +103,46 @@
 			path = Items;
 			sourceTree = "<group>";
 		};
+		4251418C29501ACD00E0C75B /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				4251418D29501ACD00E0C75B /* HAKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		4251418E29501C3F00E0C75B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4251419129501C9200E0C75B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4251419229501CA500E0C75B /* RoomItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4251419429501D7E00E0C75B /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				428F291A28EE2C16006728AA /* RoomSetupViewLegacy.swift */,
+			);
+			path = Old;
+			sourceTree = "<group>";
+		};
 		42A38F7428EA121300D669D3 = {
 			isa = PBXGroup;
 			children = (
+				4251418C29501ACD00E0C75B /* Packages */,
 				42CA9BF028ED67CD00B53C9E /* README.md */,
 				42CA9BF128ED6B6F00B53C9E /* LICENCE.md */,
 				42A38F7F28EA121300D669D3 /* HAConnect */,
 				42A38F7E28EA121300D669D3 /* Products */,
+				4251418E29501C3F00E0C75B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +159,7 @@
 			children = (
 				42CA9BE928ED5F1400B53C9E /* HAConnect.entitlements */,
 				42CA9BE428ED4E9800B53C9E /* Info.plist */,
+				4251419129501C9200E0C75B /* Models */,
 				4239919E28EA2EC20022F1C4 /* Helpers */,
 				42A38F9328EA222700D669D3 /* Managers */,
 				42A38F9628EA232A00D669D3 /* Views */,
@@ -153,6 +191,7 @@
 		42A38F9628EA232A00D669D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4251419429501D7E00E0C75B /* Old */,
 				423991A828EA5BCA0022F1C4 /* Items */,
 				42CA9BDF28ED353500B53C9E /* Setup */,
 				423991A128EA3B2B0022F1C4 /* Cards */,
@@ -185,7 +224,7 @@
 			children = (
 				42CA9BE028ED354600B53C9E /* SetupView.swift */,
 				42CA9BE528ED500A00B53C9E /* SetupViewLogic.swift */,
-				428F291A28EE2C16006728AA /* RoomSetupView.swift */,
+				4251419729501DB400E0C75B /* RoomSetupView.swift */,
 			);
 			path = Setup;
 			sourceTree = "<group>";
@@ -209,7 +248,7 @@
 			packageProductDependencies = (
 				42CA9BEB28ED608F00B53C9E /* SlideOverCard */,
 				42CA9BEE28ED60D900B53C9E /* CodeScanner */,
-				428F291828EE2562006728AA /* HAKit */,
+				4251418F29501C3F00E0C75B /* HAKit */,
 			);
 			productName = HAConnect;
 			productReference = 42A38F7D28EA121300D669D3 /* HAConnect.app */;
@@ -242,7 +281,6 @@
 			packageReferences = (
 				42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */,
 				42CA9BED28ED60D900B53C9E /* XCRemoteSwiftPackageReference "CodeScanner" */,
-				428F291728EE2562006728AA /* XCRemoteSwiftPackageReference "HAKit" */,
 			);
 			productRefGroup = 42A38F7E28EA121300D669D3 /* Products */;
 			projectDirPath = "";
@@ -271,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				423991AC28EA5C080022F1C4 /* LightBrightnessSlider.swift in Sources */,
+				4251419829501DB400E0C75B /* RoomSetupView.swift in Sources */,
 				42CA9BE128ED354600B53C9E /* SetupView.swift in Sources */,
 				42A38F8328EA121300D669D3 /* RootView.swift in Sources */,
 				42A38F9228EA21F700D669D3 /* HAManager.swift in Sources */,
@@ -281,8 +320,8 @@
 				42A38F8128EA121300D669D3 /* HAConnectApp.swift in Sources */,
 				423991A528EA40400022F1C4 /* Haptics.swift in Sources */,
 				42CA9BDD28ED2FBD00B53C9E /* LightCardSheet.swift in Sources */,
+				4251419329501CA500E0C75B /* RoomItem.swift in Sources */,
 				42A38F9528EA223200D669D3 /* AppSettings.swift in Sources */,
-				428F291B28EE2C16006728AA /* RoomSetupView.swift in Sources */,
 				423991AA28EA5BD50022F1C4 /* EntityIcon.swift in Sources */,
 				423991A028EA2ECE0022F1C4 /* ColorHelpers.swift in Sources */,
 				423991A328EA3B350022F1C4 /* LightCard.swift in Sources */,
@@ -501,14 +540,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		428F291728EE2562006728AA /* XCRemoteSwiftPackageReference "HAKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/LeoSM-07/HAKit";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		42CA9BEA28ED608F00B53C9E /* XCRemoteSwiftPackageReference "SlideOverCard" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joogps/SlideOverCard";
@@ -528,9 +559,8 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		428F291828EE2562006728AA /* HAKit */ = {
+		4251418F29501C3F00E0C75B /* HAKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 428F291728EE2562006728AA /* XCRemoteSwiftPackageReference "HAKit" */;
 			productName = HAKit;
 		};
 		42CA9BEB28ED608F00B53C9E /* SlideOverCard */ = {

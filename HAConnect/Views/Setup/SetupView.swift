@@ -98,6 +98,7 @@ struct SetupView: View {
             .navigationTitle("Connect HA")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .disabled(showingQRScanner)
         .slideOverCard(isPresented: $showingQRScanner, options: []) {
             VStack {
                 Text("Scan QR Code").font(.system(size: 28, weight: .bold))
@@ -126,7 +127,7 @@ struct SetupView: View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
                 Text(prompt)
-                .foregroundColor(.secondary)
+                    .foregroundColor(.secondary)
                 if t != "" {
                     Image(systemName: t.isValidURL ? "checkmark" : "xmark")
                         .foregroundColor(t.isValidURL ? .green : .red)
@@ -156,6 +157,8 @@ struct SetupView: View {
             errorMessage = "Long-lived access Token is blank!"
             print(errorMessage)
             return
+        } else if useExternalOnly && externalURLField.isValidURL{
+            checkExternalUrl()
         } else {
             checkSession(url: internalURLField) { result in
                 if result == "REQUEST_TIMEOUT"{
@@ -172,33 +175,37 @@ struct SetupView: View {
                     return
                 } else {
                     if externalURLField != "" {
-                        checkSession(url: externalURLField) { result in
-                            if result == "REQUEST_TIMEOUT"{
-                                errorMessage = "The External URL timed out."
-                                print(errorMessage)
-                                return
-                            } else if result == "CONNECTION_ERROR" {
-                                errorMessage = "Could not connect to External URL."
-                                print(errorMessage)
-                                return
-                            } else if result == "INVALID_TOKEN" {
-                                errorMessage = "Token was not valid"
-                                print(errorMessage)
-                                return
-                            } else {
-                                print("SETTINGS CONFIRMED")
-                                appSettings.internalURL = internalURLField
-                                appSettings.externalURL = externalURLField
-                                appSettings.token = tokenField
-                                appSettings.wifiKeyword = wifiKeywordField
-                                appSettings.externalURLOnly = useExternalOnly
-                                isCheckingFields = false
-                                dismiss()
-                                return
-                            }
-                        }
+                        checkExternalUrl()
                     }
                 }
+            }
+        }
+    }
+
+    func checkExternalUrl() {
+        checkSession(url: externalURLField) { result in
+            if result == "REQUEST_TIMEOUT"{
+                errorMessage = "The External URL timed out."
+                print(errorMessage)
+                return
+            } else if result == "CONNECTION_ERROR" {
+                errorMessage = "Could not connect to External URL."
+                print(errorMessage)
+                return
+            } else if result == "INVALID_TOKEN" {
+                errorMessage = "Token was not valid"
+                print(errorMessage)
+                return
+            } else {
+                print("SETTINGS CONFIRMED")
+                appSettings.internalURL = internalURLField
+                appSettings.externalURL = externalURLField
+                appSettings.token = tokenField
+                appSettings.wifiKeyword = wifiKeywordField
+                appSettings.externalURLOnly = useExternalOnly
+                isCheckingFields = false
+                dismiss()
+                return
             }
         }
     }

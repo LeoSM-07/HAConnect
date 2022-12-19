@@ -17,7 +17,7 @@ extension Array {
 }
 
 struct DashboardView: View {
-    @EnvironmentObject var appSettigs: AppSettings
+    @EnvironmentObject var appSettings: AppSettings
     @EnvironmentObject var homeAssistant: HAKitViewModel
     
     let columns = [
@@ -27,6 +27,8 @@ struct DashboardView: View {
 
     @State var showSliders = true
     @State var showSettingsSheet = false
+    @State var showNewRoomView = false
+
 
     var body: some View {
         NavigationView {
@@ -70,6 +72,12 @@ struct DashboardView: View {
                         } label: {
                             Label("Settings", systemImage: "gear")
                         }
+                        #warning("Testing")
+                        Button {
+                            showNewRoomView.toggle()
+                        } label: {
+                            Label("New Room", systemImage: "plus")
+                        }
                         Section {
                             Toggle(isOn: $showSliders) {
                                 Label("Brightness Sliders", systemImage: "slider.horizontal.3")
@@ -84,12 +92,15 @@ struct DashboardView: View {
                 }
             }
         }
-        .sheet(isPresented: $appSettigs.needsRoomSetup, content: {
+        .sheet(isPresented: $appSettings.needsRoomSetup, content: {
             RoomSetupView()
                 .interactiveDismissDisabled()
         })
         .sheet(isPresented: $showSettingsSheet) {
             SettingsView()
+        }
+        .sheet(isPresented: $showNewRoomView) {
+            RoomSetupView()
         }
         .onChange(of: showSettingsSheet, perform: { v in
             if v == false { homeAssistant.saveRoomList() }

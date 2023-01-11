@@ -34,29 +34,42 @@ struct DashboardView: View {
         NavigationView {
             ScrollView {
                 Grid(horizontalSpacing: 10, verticalSpacing: 10) {
-                    ForEach(Array(homeAssistant.roomList.enumerated()), id: \.element) { index, room in
-                        let lightsArrayModified = room.entities.filter { $0.starts(with: "light.") }.chunked(into: 2)
+                    ForEach(RoomData().roomList, id: \.self) { room in
 
-                        Text(room.roomName)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        VStack {
+                            HStack {
+                                Button {
+                                    homeAssistant.callService(id: room.primaryLight, d: "light", s: "toggle", data: nil)
+                                    hapticResponse(.success)
+                                } label: {
+                                    EntityIcon(room.primaryLight, icon: room.iconName, padding: 13)
+                                        .frame(height: 38)
+                                }
 
-                        if room.entities.contains(where: { $0.starts(with: "scene.") }) {
-                            GridRow {
-                                Text("Scenes Here")
-                                    .cardStyle()
-                                    .gridCellColumns(2)
-                            }
-                        }
-
-                        ForEach(lightsArrayModified, id: \.self) { array in
-                            GridRow {
-                                ForEach(array, id: \.self) { entity in
-                                    LightCard(originalEntityId: entity, sliders: $showSliders)
+                                VStack {
+                                    Text(room.name)
+                                        .font(.title3.weight(.semibold))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                 }
                             }
-                            .frame(height: 120)
                         }
+                        .cardStyle()
+
+//                        if room.entities.contains(where: { $0.starts(with: "scene.") }) {
+//                            GridRow {
+//                                Text("Scenes Here")
+//                                    .cardStyle()
+//                                    .gridCellColumns(2)
+//                            }
+//                        }
+//                        ForEach(lightsArrayModified, id: \.self) { array in
+//                            GridRow {
+//                                ForEach(array, id: \.self) { entity in
+//                                    LightCard(originalEntityId: entity, sliders: $showSliders)
+//                                }
+//                            }
+//                            .frame(height: 120)
+//                        }
                     }
                 }
                 .padding(.horizontal)
@@ -71,12 +84,6 @@ struct DashboardView: View {
                             sheetHaptics()
                         } label: {
                             Label("Settings", systemImage: "gear")
-                        }
-                        #warning("Testing")
-                        Button {
-                            showNewRoomView.toggle()
-                        } label: {
-                            Label("New Room", systemImage: "plus")
                         }
                         Section {
                             Toggle(isOn: $showSliders) {

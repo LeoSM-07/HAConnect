@@ -11,9 +11,17 @@ import SwiftUI
 struct EntityIcon: View {
 
     @EnvironmentObject var homeAssistant: HAKitViewModel
-    var originalEntityId: String
+    let originalEntityId: String
+    let icon: String
+    let padding: CGFloat
     var entity: HAEntity? {
         homeAssistant.entities.first(where: { $0.entityId == originalEntityId })
+    }
+
+    init(_ originalEntityId: String, icon: String? = nil, padding: CGFloat? = nil) {
+        self.originalEntityId = originalEntityId
+        self.icon = icon ?? "lightbulb.fill"
+        self.padding = padding ?? 12
     }
 
     var hasColor: Bool {
@@ -23,11 +31,11 @@ struct EntityIcon: View {
     }
 
     var body: some View {
-        Image(systemName: "lightbulb.fill")
+        Image(systemName: icon)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(hasColor ? determineLightColor(entity!) : .secondary)
-            .padding(12)
+            .padding(padding)
             .background {
                 Circle()
                     .fill(hasColor ? determineLightColor(entity!)!.opacity(0.2) : Color(uiColor: .secondarySystemBackground))
@@ -37,7 +45,7 @@ struct EntityIcon: View {
 
 struct EntityIcon_Previews: PreviewProvider {
     static var previews: some View {
-        EntityIcon(originalEntityId: "light.leo_table_lamp")
+        EntityIcon("light.leo_table_lamp")
             .environmentObject(HAKitViewModel())
     }
 }

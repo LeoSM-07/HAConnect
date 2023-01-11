@@ -28,7 +28,8 @@ struct LightCard: View {
                     homeAssistant.callService(id: originalEntityId, d: "light", s: "toggle", data: nil)
                     hapticResponse(.success)
                 } label: {
-                    EntityIcon(originalEntityId: originalEntityId)
+                    EntityIcon(originalEntityId)
+                        .padding(2)
                         .frame(height: 50)
                 }
 
@@ -89,7 +90,7 @@ struct CardStyleModifier: ViewModifier {
         content
             .padding(10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 120)
+//            .frame(height: 120)
             .background {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15)

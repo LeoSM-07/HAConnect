@@ -34,7 +34,7 @@ struct LightsSheetView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                EntityIcon(originalEntityId: originalEntityId)
+                EntityIcon(originalEntityId)
 
                 VStack(alignment: .leading) {
                     Text(entity?.attributes.friendlyName ?? originalEntityId)
